@@ -1,0 +1,29 @@
+# Korean strings go here for Rails i18n
+ko:
+  shortcuts_settings_enable_in_issues: 일감 단축키 사용
+  shortcuts_settings_enable_in_editor: 편집기 단축키 사용
+  shortcuts_settings_enable_help_link: 도움말 링크 표시
+  shortcuts_settings_enable_help_modal: 도움말 모달 사용
+  shortcuts_settings_help_link_label: 도움말 링크 이름
+  shortcuts_help_title: Redmine Shortcuts 단축키 안내
+  shortcuts_help_issue_index: 일감 목록
+  shortcuts_help_issue_show: 일감 보기
+  shortcuts_help_editor: 편집기
+  shortcuts_help_new_issue: 새 일감
+  shortcuts_help_copy_issue: 복사
+  shortcuts_help_delete_issue: 삭제
+  shortcuts_help_edit_issue: 편집
+  shortcuts_help_log_time_issue: 작업시간 기록
+  shortcuts_help_quote_issue: 댓글달기
+  shortcuts_help_unwatch_issue: 지켜보기 해제
+  shortcuts_help_watch_issue: 지켜보기
+  shortcuts_help_strong: 굵게
+  shortcuts_help_italic: 기울임
+  shortcuts_help_underline: 밑줄
+  shortcuts_help_deleted: 취소선
+  shortcuts_help_submit: 저장
+  shortcuts_help_common: 공통
+  shortcuts_help_search: 검색
+  shortcuts_help_project_tab: N번째 프로젝트 탭으로 이동
+  shortcuts_inline_code: 인라인 코드
+  shortcuts_preformatted_text: 서식 있는 텍스트

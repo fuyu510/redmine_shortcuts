@@ -6,6 +6,7 @@ Simple Redmine plugin that provides keyboard shortcuts.
 Common
 * **S** search
 * **?** open help modal
+* **1..9** go to the Nth tab of the current project menu
 
 On issues index
 * **N** new issue
@@ -29,7 +30,7 @@ On editor
 * **CTRL + Enter** submit
 
 ## Supported versions
-The plugin has been developed and tested on Redmine 3.4.x, 4.x and 5.x but should also works on previous versions.
+The plugin has been developed and tested on Redmine 3.4.x, 4.x, 5.x, 6.x and 7.0 but should also works on previous versions.
 Any feedback will be appreciated.
 
 ## Installation

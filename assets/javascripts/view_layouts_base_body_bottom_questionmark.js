@@ -1,9 +1,9 @@
 // Question Mark.
-var baseUrl = $("head link[rel='stylesheet']:first").attr('href').replace(/stylesheets.+$/, '');
+var helpUrl = window.redmineShortcutsHelpUrl || '/redmine_shortcuts/help';
 $questionMarkModalRoot = $('<div class="question-mark-modal-root" />');
 $questionMarkModal = $('<div class="question-mark-modal"><span aria-label="Close" aria-role="button" class="question-mark--close"/></div>')
 $questionMarkModalRoot.append($questionMarkModal);
-$questionMarkModal.append('<iframe width="500px" height="500px" src="' + baseUrl + 'redmine_shortcuts/help" />');
+$questionMarkModal.append('<iframe width="500px" height="500px" src="' + helpUrl + '" />');
 $('body').append($questionMarkModalRoot);
 $(document).on('keypress', function(e) {
   e = e || window.event;
