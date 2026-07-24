@@ -10,9 +10,9 @@ $(document).keydown(function (e) {
             if (e.keyCode == 83) {
                 $("#q").focus();
                 e.preventDefault();
-            // 1-9: go to the Nth tab of the main menu
+            // 1-9: go to the Nth tab of the main menu, skipping the "+" (new object) button
             } else if (e.key >= '1' && e.key <= '9') {
-                var tab = $('#main-menu > ul > li > a').eq(parseInt(e.key, 10) - 1);
+                var tab = $('#main-menu > ul > li > a').not('#new-object').eq(parseInt(e.key, 10) - 1);
                 if (tab.length && tab.attr('href')) {
                     window.location.href = tab.attr('href');
                     e.preventDefault();
