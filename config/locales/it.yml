@@ -5,6 +5,7 @@ it:
   shortcuts_settings_enable_help_link: Abilita link aiuto
   shortcuts_settings_enable_help_modal: Abilita modale aiuto
   shortcuts_settings_help_link_label: Etichetta link aiuto
+  shortcuts_top_menu_label: Scorciatoie
   shortcuts_help_title: Guida Rapida Redmine Shortcuts
   shortcuts_help_issue_index: Elenco segnalazioni
   shortcuts_help_issue_show: Segnalazione

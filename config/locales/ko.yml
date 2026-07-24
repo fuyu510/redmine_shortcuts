@@ -5,6 +5,7 @@ ko:
   shortcuts_settings_enable_help_link: 도움말 링크 표시
   shortcuts_settings_enable_help_modal: 도움말 모달 사용
   shortcuts_settings_help_link_label: 도움말 링크 이름
+  shortcuts_top_menu_label: 단축키
   shortcuts_help_title: Redmine Shortcuts 단축키 안내
   shortcuts_help_issue_index: 일감 목록
   shortcuts_help_issue_show: 일감 보기

@@ -5,6 +5,7 @@ en:
   shortcuts_settings_enable_help_link: Enable help link
   shortcuts_settings_enable_help_modal: Enable help modal
   shortcuts_settings_help_link_label: Help link label
+  shortcuts_top_menu_label: Shortcuts
   shortcuts_help_title: Redmine Shortcuts Quick Reference
   shortcuts_help_issue_index: Issues index
   shortcuts_help_issue_show: Issue show

@@ -3,6 +3,7 @@ pl:
   shortcuts_settings_enable_in_issues: Włącz skróty klawiszowe dla zagadnień
   shortcuts_settings_enable_in_editor: Włącz skróty klawiszowe w edytorze
   shortcuts_settings_enable_help_link: Dodaj link pomocy w menu
+  shortcuts_top_menu_label: Skróty
   shortcuts_settings_help_link_label: Etykieta linku pomocy
   shortcuts_help_title: Lista skrótów klawiszowych Redmine Shortcuts
   shortcuts_help_issue_index: Widok listy zagadnień
