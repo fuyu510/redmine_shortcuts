@@ -21,6 +21,50 @@ function styleSelectedText(textarea, prepend, append) {
     }
 }
 
+function indentSelectedListLines(textarea, outdent) {
+    $start = textarea.prop('selectionStart');
+    $end = textarea.prop('selectionEnd');
+    $content = textarea.val();
+    $blockStart = $content.lastIndexOf("\n", $start - 1) + 1;
+    $blockEnd = $content.indexOf("\n", $end);
+    if ($blockEnd == -1) {
+        $blockEnd = $content.length;
+    }
+    $lines = $content.slice($blockStart, $blockEnd).split("\n");
+    $listRegex = /^(\s*)([-*+]|\d+[.)])\s/;
+    if (!$lines.some(function (line) { return $listRegex.test(line); })) {
+        return;
+    }
+
+    $startShift = 0;
+    $totalShift = 0;
+    $lines = $lines.map(function (line, i) {
+        var shift = 0;
+        if ($listRegex.test(line)) {
+            if (outdent) {
+                var removed = line.match(/^ {1,2}/);
+                if (removed) {
+                    shift = -removed[0].length;
+                    line = line.slice(-shift);
+                }
+            } else {
+                shift = 2;
+                line = '  ' + line;
+            }
+        }
+        if (i == 0) {
+            $startShift = shift;
+        }
+        $totalShift += shift;
+        return line;
+    });
+    $content = $content.slice(0, $blockStart) + $lines.join("\n") + $content.slice($blockEnd);
+    textarea.val($content);
+    textarea.focus();
+    textarea.prop('selectionStart', Math.max($blockStart, $start + $startShift));
+    textarea.prop('selectionEnd', Math.max($blockStart, $end + $totalShift));
+}
+
 $(document).keydown(function (e) {
     if ($(document.activeElement).hasClass('wiki-edit')) {
         if ((e.ctrlKey || e.metaKey) && !e.shiftKey) {
@@ -43,6 +87,14 @@ $(document).keydown(function (e) {
             // CTRL/CMD + P
             } else if (e.keyCode == 80) {
                 styleSelectedText($(document.activeElement), "```\n", "\n```");
+                e.preventDefault();
+            // CTRL/CMD + ]
+            } else if (e.keyCode == 221) {
+                indentSelectedListLines($(document.activeElement), false);
+                e.preventDefault();
+            // CTRL/CMD + [
+            } else if (e.keyCode == 219) {
+                indentSelectedListLines($(document.activeElement), true);
                 e.preventDefault();
             // CTRL/CMD + ENTER
             } else if (e.keyCode == 13) {

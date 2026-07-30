@@ -27,6 +27,8 @@ On editor
 * **CTRL + U** underline
 * **CTRL + L** inline code
 * **CTRL + P** preformatted text
+* **CTRL + ]** indent list item (CommonMark only)
+* **CTRL + [** outdent list item (CommonMark only)
 * **CTRL + Enter** submit
 
 ## Supported versions

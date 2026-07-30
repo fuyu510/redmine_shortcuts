@@ -28,3 +28,5 @@ ko:
   shortcuts_help_project_tab: N번째 프로젝트 탭으로 이동
   shortcuts_inline_code: 인라인 코드
   shortcuts_preformatted_text: 서식 있는 텍스트
+  shortcuts_help_list_indent: 목록 들여쓰기
+  shortcuts_help_list_outdent: 목록 내어쓰기

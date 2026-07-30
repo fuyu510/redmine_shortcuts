@@ -28,3 +28,5 @@ en:
   shortcuts_help_project_tab: Go to the Nth project tab
   shortcuts_inline_code: Inline code
   shortcuts_preformatted_text: Preformatted text
+  shortcuts_help_list_indent: Indent list item
+  shortcuts_help_list_outdent: Outdent list item

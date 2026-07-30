@@ -28,3 +28,5 @@ it:
   shortcuts_help_project_tab: Vai alla N-esima scheda del progetto
   shortcuts_inline_code: Codice sorgente
   shortcuts_preformatted_text: Testo preformattato
+  shortcuts_help_list_indent: Aumenta rientro elenco
+  shortcuts_help_list_outdent: Riduci rientro elenco
