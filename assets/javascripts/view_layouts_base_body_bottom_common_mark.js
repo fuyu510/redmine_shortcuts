@@ -21,6 +21,14 @@ function styleSelectedText(textarea, prepend, append) {
     }
 }
 
+function listLineInfo(line) {
+    var m = line.match(/^(\s*)([-*+]|\d+(?:\.\d+)*[.)])(\s+)/);
+    if (!m) {
+        return null;
+    }
+    return { indent: m[1].length, contentCol: m[1].length + m[2].length + m[3].length };
+}
+
 function indentSelectedListLines(textarea, outdent) {
     $start = textarea.prop('selectionStart');
     $end = textarea.prop('selectionEnd');
@@ -30,36 +38,64 @@ function indentSelectedListLines(textarea, outdent) {
     if ($blockEnd == -1) {
         $blockEnd = $content.length;
     }
-    $lines = $content.slice($blockStart, $blockEnd).split("\n");
-    $listRegex = /^(\s*)([-*+]|\d+[.)])\s/;
-    if (!$lines.some(function (line) { return $listRegex.test(line); })) {
+    $lines = $content.split("\n");
+    $firstLine = ($content.slice(0, $blockStart).match(/\n/g) || []).length;
+    $lineCount = $content.slice($blockStart, $blockEnd).split("\n").length;
+    $firstInfo = null;
+    $firstIdx = -1;
+    for (var i = $firstLine; i < $firstLine + $lineCount; i++) {
+        $firstInfo = listLineInfo($lines[i]);
+        if ($firstInfo) {
+            $firstIdx = i;
+            break;
+        }
+    }
+    if (!$firstInfo) {
         return;
+    }
+
+    // the shift is derived from the first list line of the selection and
+    // applied to every list line in it, so relative nesting is preserved
+    $blockShift = 0;
+    $ref = null;
+    if (outdent) {
+        // align with the nearest list line above at a shallower level,
+        // or drop two spaces when there is none
+        for (var j = $firstIdx - 1; j >= 0; j--) {
+            $ref = listLineInfo($lines[j]);
+            if ($ref && $ref.indent < $firstInfo.indent) {
+                break;
+            }
+            $ref = null;
+        }
+        $blockShift = ($ref ? $ref.indent : Math.max(0, $firstInfo.indent - 2)) - $firstInfo.indent;
+    } else {
+        // align with the content column of the nearest list line above, so the
+        // line becomes its child, or add two spaces when there is none
+        for (var j = $firstIdx - 1; j >= 0; j--) {
+            $ref = listLineInfo($lines[j]);
+            if ($ref) {
+                break;
+            }
+        }
+        $blockShift = ($ref ? Math.max($firstInfo.indent, $ref.contentCol) : $firstInfo.indent + 2) - $firstInfo.indent;
     }
 
     $startShift = 0;
     $totalShift = 0;
-    $lines = $lines.map(function (line, i) {
+    for (var i = $firstLine; i < $firstLine + $lineCount; i++) {
+        var info = listLineInfo($lines[i]);
         var shift = 0;
-        if ($listRegex.test(line)) {
-            if (outdent) {
-                var removed = line.match(/^ {1,2}/);
-                if (removed) {
-                    shift = -removed[0].length;
-                    line = line.slice(-shift);
-                }
-            } else {
-                shift = 2;
-                line = '  ' + line;
-            }
+        if (info) {
+            shift = Math.max($blockShift, -info.indent);
+            $lines[i] = ' '.repeat(info.indent + shift) + $lines[i].slice(info.indent);
         }
-        if (i == 0) {
+        if (i == $firstLine) {
             $startShift = shift;
         }
         $totalShift += shift;
-        return line;
-    });
-    $content = $content.slice(0, $blockStart) + $lines.join("\n") + $content.slice($blockEnd);
-    textarea.val($content);
+    }
+    textarea.val($lines.join("\n"));
     textarea.focus();
     textarea.prop('selectionStart', Math.max($blockStart, $start + $startShift));
     textarea.prop('selectionEnd', Math.max($blockStart, $end + $totalShift));
