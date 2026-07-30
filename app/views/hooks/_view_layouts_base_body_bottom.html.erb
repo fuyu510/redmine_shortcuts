@@ -7,7 +7,7 @@
     <%= javascript_include_tag 'view_layouts_base_body_bottom_common_mark', :plugin => 'redmine_shortcuts' %>
   <% end %>
   <% if Setting.plugin_redmine_shortcuts['enable_help_modal'] == '1' && !(Setting.login_required? and User.current.anonymous?) %>
-    <%= javascript_tag "window.redmineShortcutsHelpUrl = '#{escape_javascript url_for(:controller => 'help', :action => 'index')}';" %>
+    <%= javascript_tag "window.redmineShortcutsHelpUrl = '#{escape_javascript url_for(:controller => 'shortcuts_help', :action => 'index')}';" %>
     <%= javascript_include_tag 'view_layouts_base_body_bottom_questionmark', :plugin => 'redmine_shortcuts' %>
     <%= stylesheet_link_tag 'questionmark', :plugin => 'redmine_shortcuts', media: "all" %>
   <% end %>
