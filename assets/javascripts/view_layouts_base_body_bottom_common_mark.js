@@ -21,6 +21,25 @@ function styleSelectedText(textarea, prepend, append) {
     }
 }
 
+function codeSelectedText(textarea) {
+    $start = textarea.prop('selectionStart');
+    $end = textarea.prop('selectionEnd');
+    $content = textarea.val();
+    if ($content.slice($start, $end).indexOf("\n") == -1) {
+        styleSelectedText(textarea, '`');
+        return;
+    }
+    // a multi-line selection becomes a fenced code block spanning whole lines
+    $blockStart = $content.lastIndexOf("\n", $start - 1) + 1;
+    $blockEnd = $content.indexOf("\n", $end);
+    if ($blockEnd == -1) {
+        $blockEnd = $content.length;
+    }
+    textarea.prop('selectionStart', $blockStart);
+    textarea.prop('selectionEnd', $blockEnd);
+    styleSelectedText(textarea, "```\n", "\n```");
+}
+
 function listLineInfo(line) {
     var m = line.match(/^(\s*)([-*+]|\d+(?:\.\d+)*[.)])(\s+)/);
     if (!m) {
@@ -118,7 +137,7 @@ $(document).keydown(function (e) {
                 e.preventDefault();
             // CTRL/CMD + L
             } else if (e.keyCode == 76) {
-                styleSelectedText($(document.activeElement), '`');
+                codeSelectedText($(document.activeElement));
                 e.preventDefault();
             // CTRL/CMD + P
             } else if (e.keyCode == 80) {
